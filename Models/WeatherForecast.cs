@@ -1,6 +1,6 @@
 using System;
 
-namespace SafeAccountsUI
+namespace SafeAccountsUI.Models
 {
     public class WeatherForecast
     {

@@ -1,2 +1,2 @@
 # SafeAccountsUI
-ASP.Net Core Angular MVVM UI For the SafeAccountAPI
+ASP.Net Core ReactJS UI For the SafeAccountAPI

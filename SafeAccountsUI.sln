@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAccountsUI", "SafeAccountsUI.csproj", "{FB6332F4-453E-4AD7-AB9B-6A43277C7E6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAccountsUI", "SafeAccountsUI.csproj", "{BFCDA20A-9A79-4CC1-9E23-3BC645FE4588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB6332F4-453E-4AD7-AB9B-6A43277C7E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB6332F4-453E-4AD7-AB9B-6A43277C7E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB6332F4-453E-4AD7-AB9B-6A43277C7E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB6332F4-453E-4AD7-AB9B-6A43277C7E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFCDA20A-9A79-4CC1-9E23-3BC645FE4588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFCDA20A-9A79-4CC1-9E23-3BC645FE4588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFCDA20A-9A79-4CC1-9E23-3BC645FE4588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFCDA20A-9A79-4CC1-9E23-3BC645FE4588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8238D02C-07AE-48AF-813A-3F58353431F3}
+		SolutionGuid = {C4A431BD-D02D-4AC7-9145-DF23D66959C8}
 	EndGlobalSection
 EndGlobal
