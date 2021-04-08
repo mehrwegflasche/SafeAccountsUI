@@ -25,12 +25,17 @@ export class SignUp extends Component {
             <div class="div-signup">
                 <form onSubmit={this.SignUp}>
                     <div class="container">
-                        <label id="lbl-signup-name" htmlFor="text-input-signup-firstname"><b>First Name</b></label><br/>
-                        <input class="text-input-signup" type="text" placeholder="Enter First Name" id="text-input-signup-firstname" size="30" required></input>
+                        <label id="lbl-signup-firstname" htmlFor="text-input-signup-firstname"><b>First Name</b></label><br />
+                        <input class="text-input-signup-name" type="text" placeholder="" id="text-input-signup-firstname" size="35" required></input>
                         <br />
-
+                        <label id="lbl-signup-lastname" htmlFor="text-input-signup-lastname"><b>Last Name</b></label><br />
+                        <input class="text-input-signup-name" type="text" placeholder="" id="text-input-signup-lastname" size="35" required></input>
+                        <br />
+                        <label id="lbl-signup-email" htmlFor="text-input-signup-email"><b>Email</b></label><br/>
+                        <input type="email" placeholder="" id="text-input-signup-email" size="35" required></input>
+                        <br />
                         <label id="lbl-signup-pass" htmlFor="text-input-signup-pass"><b>Password</b></label><br/>
-                        <input class="text-input-signup" type="password" placeholder="Enter Password" id="text-input-signup-pass" size="30" required></input>
+                        <input type="password" placeholder="" id="text-input-signup-pass" size="35" required></input>
                         <br />
                         <button id="btn-signup" type="submit">Sign Up</button>
                     </div>
