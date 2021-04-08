@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 import './SignUp.css';
+import { Redirect } from 'react-router-dom';
 
 export class SignUp extends Component {
     static displayName = SignUp.name;
 
     constructor(props) {
         super(props);
-        this.state = { loading: true, data: null };
+        this.state = { signedUp: false, data: null, redirect: false };
         this.SignUp = this.SignUp.bind(this); // bind sign up function
     }
 
     componentDidMount() {
-        //this.populateSignUpResults();
     }
 
-    //static renderSignUpResults(results) {
-    //    return (
-    //        <p>{results}</p>
-    //    );
-    //}
-
     render() {
-        if (!this.state.loading)
-            return (
-                <p>{this.state.data}</p>
-                );
+        if (this.state.redirect)
+            return (<Redirect to="/home" />);
+
+        if (this.state.signedUp)
+            return (<p>{this.state.data}</p>);
+
         return (
             <div class="div_signup">
                 <form id="form_signup" onSubmit={this.SignUp}>
@@ -48,29 +44,13 @@ export class SignUp extends Component {
         );
     }
 
-    //render() {
-    //    let contents = this.state.loading
-    //        ? <p><em>Loading...</em></p>
-    //        : SignUp.renderSignUpResults(this.state.signUpResults);
-
-    //    return (
-    //        <div>
-    //        <h1 id="tabelLabel" >Sign Up</h1>
-    //        <p>This component demonstrates fetching data from the server.</p>
-    //        {contents}
-    //        </div>
-    //    );
-    //}
-
     //this is the function where we will send sign up stuff to our controller our controller
     async SignUp(event) {
+        event.preventDefault(); //prevent page refresh
         var firstname = event.target.text_input_signup_firstname.value;
         var lastname = event.target.text_input_signup_lastname.value;
         var email = event.target.text_input_signup_email.value;
         var password = event.target.text_input_signup_pass.value;
-
-        //this.setState({ data: event.target.text_input_signup_lastname.value, loading: false });
-        //return;
 
         const requestOptions = {
             method: 'POST',
@@ -80,7 +60,7 @@ export class SignUp extends Component {
 
         const response = await fetch('users/signup', requestOptions);
         const responseText = await response.text();
-        this.setState({ data: responseText, loading: false });
-        var spaces = 5 + 3;
+        this.setState({ data: responseText, signedUp: true })
+        this.timeout = setTimeout(() => this.setState({ redirect: true }), 5000); // set redirect to true after 5 seconds
   }
 }
