@@ -3,11 +3,11 @@ import './SignUp.css';
 
 export class SignUp extends Component {
     static displayName = SignUp.name;
-    rememberMe = false;
 
     constructor(props) {
         super(props);
-        //this.state = { signUpResults: "", loading: true };
+        this.state = { loading: true, data: null };
+        this.SignUp = this.SignUp.bind(this); // bind sign up function
     }
 
     componentDidMount() {
@@ -21,23 +21,27 @@ export class SignUp extends Component {
     //}
 
     render() {
+        if (!this.state.loading)
+            return (
+                <p>{this.state.data}</p>
+                );
         return (
-            <div class="div-signup">
-                <form onSubmit={this.SignUp}>
+            <div class="div_signup">
+                <form id="form_signup" onSubmit={this.SignUp}>
                     <div class="container">
-                        <label id="lbl-signup-firstname" htmlFor="text-input-signup-firstname"><b>First Name</b></label><br />
-                        <input class="text-input-signup-name" type="text" placeholder="" id="text-input-signup-firstname" size="35" required></input>
+                        <label id="lbl_signup_firstname" htmlFor="text_input_signup_firstname"><b>First Name</b></label><br />
+                        <input class="text_input_signup_name" type="text" placeholder="" id="text_input_signup_firstname" size="35" required></input>
                         <br />
-                        <label id="lbl-signup-lastname" htmlFor="text-input-signup-lastname"><b>Last Name</b></label><br />
-                        <input class="text-input-signup-name" type="text" placeholder="" id="text-input-signup-lastname" size="35" required></input>
+                        <label id="lbl_signup_lastname" htmlFor="text_input_signup_lastname"><b>Last Name</b></label><br />
+                        <input class="text_input_signup_name" type="text" placeholder="" id="text_input_signup_lastname" size="35" required></input>
                         <br />
-                        <label id="lbl-signup-email" htmlFor="text-input-signup-email"><b>Email</b></label><br/>
-                        <input type="email" placeholder="" id="text-input-signup-email" size="35" required></input>
+                        <label id="lbl_signup_email" htmlFor="text_input_signup_email"><b>Email</b></label><br/>
+                        <input type="email" placeholder="" id="text_input_signup_email" size="35" required></input>
                         <br />
-                        <label id="lbl-signup-pass" htmlFor="text-input-signup-pass"><b>Password</b></label><br/>
-                        <input type="password" placeholder="" id="text-input-signup-pass" size="35" required></input>
+                        <label id="lbl_signup_pass" htmlFor="text_input_signup_pass"><b>Password</b></label><br/>
+                        <input type="password" placeholder="" id="text_input_signup_pass" size="35" required></input>
                         <br />
-                        <button id="btn-signup" type="submit">Sign Up</button>
+                        <button id="btn_signup" type="submit">Sign Up</button>
                     </div>
                 </form>
             </div> 
@@ -59,15 +63,24 @@ export class SignUp extends Component {
     //}
 
     //this is the function where we will send sign up stuff to our controller our controller
-    async SignUp() {
+    async SignUp(event) {
+        var firstname = event.target.text_input_signup_firstname.value;
+        var lastname = event.target.text_input_signup_lastname.value;
+        var email = event.target.text_input_signup_email.value;
+        var password = event.target.text_input_signup_pass.value;
+
+        //this.setState({ data: event.target.text_input_signup_lastname.value, loading: false });
+        //return;
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: '""'
+            body: '"{\\"firstname\\":\\"' + firstname + '\\", \\"lastname\\":\\"' + lastname + '\\", \\"email\\":\\"' + email + '\\", \\"password\\":\\"' + password + '\\"}"'
         };
 
         const response = await fetch('users/signup', requestOptions);
-        const data = await response.text();
-        this.setState({ signUpResults: data, loading: false });
+        const responseText = await response.text();
+        this.setState({ data: responseText, loading: false });
+        var spaces = 5 + 3;
   }
 }

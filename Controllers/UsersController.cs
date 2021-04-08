@@ -28,7 +28,7 @@ namespace SafeAccountsUI.Controllers
         [HttpPost("signup")]
         public string User_SignUp([FromBody]string userInfo)
         {
-            return "In Login section of Controller.. ";
+            return userInfo;
         }
     }
 }

@@ -1,4 +1,4 @@
-.div-signup {
+.div_signup {
     margin-top: 13%;
     display: flex;
     flex-direction: column;
@@ -6,19 +6,19 @@
     align-items: center;
 }
 
-.text-input-signup-name {
+.text_input_signup_name {
     float: right;
 }
 
-.div-signup-buttons {
+.div_signup_buttons {
     margin-top: 10%;
 }
 
-#lbl-signup-lastname, #lbl-signup-email, #lbl-signup-pass {
+#lbl_signup_lastname, #lbl_signup_email, #lbl_signup_pass {
     margin-top: 10%;
 }
 
-#btn-signup {
+#btn_signup {
     margin-top: 15%;
     width: 100%;
 }
