@@ -44,7 +44,7 @@ export class SignUp extends Component {
         );
     }
 
-    //this is the function where we will send sign up stuff to our controller our controller
+    //this is the function where we will call our api
     async SignUp(event) {
         event.preventDefault(); //prevent page refresh
         var firstname = event.target.text_input_signup_firstname.value;
@@ -58,7 +58,7 @@ export class SignUp extends Component {
             body: '"{\\"firstname\\":\\"' + firstname + '\\", \\"lastname\\":\\"' + lastname + '\\", \\"email\\":\\"' + email + '\\", \\"password\\":\\"' + password + '\\"}"'
         };
 
-        const response = await fetch('users/signup', requestOptions);
+        const response = await fetch('https://eus-safeaccounts-test.azurewebsites.net/users', requestOptions);
         const responseText = await response.text();
         this.setState({ data: responseText, signedUp: true })
         this.timeout = setTimeout(() => this.setState({ redirect: true }), 5000); // set redirect to true after 5 seconds
