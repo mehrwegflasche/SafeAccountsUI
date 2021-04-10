@@ -16,7 +16,7 @@ export class SignUp extends Component {
 
     render() {
         if (this.state.redirect)
-            return (<Redirect to="/home" />);
+            return (<Redirect to="/login" />);
 
         if (this.state.signedUp)
             return (<p>{this.state.data}</p>);
