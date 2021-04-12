@@ -7,17 +7,23 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { loginSuccessful: false, data: null, rememberMe: false };
+        this.state = { loginSuccessful: false, id: null, rememberMe: false };
+
+        // functions
         this.OnChangeRemeberMe = this.OnChangeRemeberMe.bind(this);
         this.Login = this.Login.bind(this);
     }
 
     render() {
-        if (this.state.redirect)
-            return (<Redirect to="/profile" />);
+        if (this.state.redirect) {
+            return (<Redirect to={{
+                pathname: '/profile',
+                state: { id: this.state.id }
+            }} />);
+        }
 
         if (this.state.loginSuccessful)
-            return (<p>{this.state.data}</p>);
+            return (<p id="p_login_successful">Login successful... Redirecting Page</p>);
 
         return (
             <div class="div_login">
@@ -30,7 +36,7 @@ export class Login extends Component {
                         <input class="text_input_login_password" type="password" placeholder="" id="text_input_login_password" size="35" required></input>
                         <br />
                         <div class="div_login_buttons">
-                            <input type="checkbox" defaultChecked="unchecked" onClick={this.OnChangeRemeberMe} id="input_chk_login_remember"></input>
+                            <input type="checkbox" defaultChecked={false} onClick={this.OnChangeRemeberMe} id="input_chk_login_remember"></input>
                             <label id="lbl-login-remember">Remember me</label>
                             <button id="btn_login" type="submit">Login</button>
                         </div>
@@ -41,7 +47,7 @@ export class Login extends Component {
     }
 
     OnChangeRemeberMe() {
-
+        this.setState({ rememberMe: !this.state.rememberMe })
     }
 
     async Login(event) {
@@ -55,9 +61,17 @@ export class Login extends Component {
             body: '"{\\"email\\":\\"' + email + '\\", \\"password\\":\\"' + password + '\\"}"'
         };
 
+        //make request and get response
         const response = await fetch('https://eus-safeaccounts-test.azurewebsites.net/users/login', requestOptions);
-        const responseText = await response.text();
-        this.setState({ data: responseText, loginSuccessful: true })
-        this.timeout = setTimeout(() => this.setState({ redirect: true }), 5000); // set redirect to true after 5 seconds
+        if (response.ok) {
+            const responseText = await response.text();
+            var obj = JSON.parse(responseText);
+
+            // we need to store this id in a cookie for us to use
+            this.setState({ id: obj.id, loginSuccessful: true })
+            this.timeout = setTimeout(() => this.setState({ redirect: true }), 3000); // set redirect to true after some seconds
+        }
+
+        this.render();
     }
 }
