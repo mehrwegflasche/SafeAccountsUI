@@ -6,14 +6,27 @@ export class Profile extends Component {
 
     constructor(props) {
         super(props);
+        this.state = { userInfo: null, userAccounts: null };
 
+        this.FetchUserInfo = this.FetchUserInfo.bind(this);
+        this.FetchUserAccounts = this.FetchUserAccounts.bind(this);
     }
 
     componentDidMount() {
+        this.FetchUserInfo(); // get user Info
+        this.FetchUserAccounts(); // get accounts
     }
 
     render() {
-        return (<p>{this.props.location.state.id}</p>)
+        var contents = null;
+
+        if (this.state.userInfo === null || this.state.userAccounts === null) {
+            contents = <p>Loading...</p>;
+        }
+        else
+            contents = this.state.userInfo;
+
+        return (contents);
     }
 
 
@@ -24,9 +37,30 @@ export class Profile extends Component {
             headers: { 'Content-Type': 'application/json' }
         };
 
-        const response = await fetch('https://eus-safeaccounts-test.azurewebsites.net/users/login', requestOptions);
-        const responseText = await response.text();
-        this.setState({ data: responseText, loginSuccessful: true })
-        this.timeout = setTimeout(() => this.setState({ redirect: true }), 5000); // set redirect to true after 5 seconds
+        const reqURI = 'https://eus-safeaccounts-test.azurewebsites.net/users/' + this.props.location.state.id;
+
+        const response = await fetch(reqURI, { credentials: 'include' }, requestOptions);
+        if (response.ok) {
+            const responseText = await response.text();
+            this.setState({ userInfo: responseText })
+        }
+        this.render();
+    }
+
+    async FetchUserAccounts() {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        const reqURI = 'https://eus-safeaccounts-test.azurewebsites.net/users/' + this.props.location.state.id + '/accounts';
+
+        const response = await fetch(reqURI, { credentials: 'include' }, requestOptions);
+        if (response.ok) {
+            const responseText = await response.text();
+            this.setState({ userAccounts: responseText })
+        }
+        this.render();
     }
 }
